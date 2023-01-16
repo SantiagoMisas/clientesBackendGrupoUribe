@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class ControllerCliente {
     @Autowired
     ServiceCliente serviceCliente;
-        @PostMapping
+        @RequestMapping(path = "/save-client", method = RequestMethod.POST)
         public ResponseEntity<?> agregarCliente(@RequestBody Cliente cliente){
             try{
                     return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.agregarCliente(cliente));
@@ -25,6 +25,7 @@ public class ControllerCliente {
 
 }
     @GetMapping
+    @RequestMapping(path = "/list-client", method = RequestMethod.GET)
     public ResponseEntity<?> listarClientes(){
                 try{
                         return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.listarClientes());
@@ -33,5 +34,26 @@ public class ControllerCliente {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
                     }
 }
+
+
+    @RequestMapping(path = "/delete-client/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> eliminarCliente(Integer id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.eliminarCliente(id));
+        }
+        catch (Exception error){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
+        }
+    }
+
+    @RequestMapping(path = "/edit-client/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> encontrarPorId(@RequestBody Cliente cliente, Integer id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
+        }
+        catch (Exception error){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
+        }
+    }
 
 }

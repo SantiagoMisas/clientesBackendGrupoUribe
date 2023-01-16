@@ -1,5 +1,7 @@
 package com.example.clientesBackend.servicios;
 
+import com.example.clientesBackend.entidades.Cliente;
+
 import java.util.List;
 
 public interface BaseService <E> {
@@ -8,10 +10,7 @@ public interface BaseService <E> {
 
     public E encontrarPorId (Integer id) throws Exception;
 
-    public E agregarCliente(E entity) throws Exception;
+    Cliente agregarCliente(Cliente entity) throws Exception;
 
-    public E editarCliente(Integer id, E entity) throws Exception;
-
-    public E eliminarCliente() throws Exception;
-
+    public boolean eliminarCliente(Integer id) throws Exception;
 }

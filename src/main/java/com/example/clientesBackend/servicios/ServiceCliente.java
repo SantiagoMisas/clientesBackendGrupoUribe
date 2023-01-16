@@ -39,29 +39,24 @@ import java.util.Optional;
     @Override
     public Cliente agregarCliente(Cliente entity) throws Exception {
                     try{
-                        entity=repositorioCliente.save(entity);
-                        return entity;
+                        return repositorioCliente.saveAndFlush(entity);
                     }
                     catch(Exception error){
                         throw new Exception(error.getMessage());
                     }
     }
 
-    @Override
-    public Cliente editarCliente(Integer id, Cliente entity) throws Exception {
-                    try {
-                            Optional<Cliente> busquedaClientePorId=repositorioCliente.findById(id);
-                            Cliente cliente= repositorioCliente.save(entity);
-                                return  cliente;
-                    }
-                    catch (Exception error){
-                        throw new Exception(error.getMessage());
-                    }
-    }
 
-    @Override
-    public Cliente eliminarCliente() throws Exception {
-                    return null;
+        @Override
+        public boolean eliminarCliente(Integer id) throws Exception {
+            try {
+                repositorioCliente.deleteById(id);
+                return  true;
+            }
+            catch (Exception error){
+                throw new Exception(error.getMessage());
+        }
+
     }
 
 
