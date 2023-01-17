@@ -79,12 +79,13 @@ import java.util.Optional;
 
         @Override
         public boolean eliminarCliente(Integer id) throws Exception {
-            try {
-                repositorioCliente.deleteById(id);
-                return true;
-            } catch (Exception error) {
-                throw new Exception(error.getMessage());
-            }
+                try {
+                        repositorioCliente.deleteById(id);
+                        return true;
+                    }
+                catch (Exception error) {
+                        throw new Exception(error.getMessage());
+                    }
         }
 
 

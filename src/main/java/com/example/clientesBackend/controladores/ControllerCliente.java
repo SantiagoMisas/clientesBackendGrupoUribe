@@ -22,8 +22,7 @@ public class ControllerCliente {
             catch (Exception error){
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo de requerimiento}"+error);
                 }
-
-}
+        }
     @GetMapping
     @RequestMapping(path = "/list-client", method = RequestMethod.GET)
     public ResponseEntity<?> listarClientes(){
@@ -33,38 +32,40 @@ public class ControllerCliente {
                 catch (Exception error){
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
                     }
-}
+        }
 
 
     @RequestMapping(path = "/delete-client/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> eliminarCliente(@PathVariable Integer id) {
-        try {
-            serviceCliente.eliminarCliente(id);
-            return ResponseEntity.status(HttpStatus.OK).body("El registro se ha eliminado correctamente"+ id);
+                try {
+                        serviceCliente.eliminarCliente(id);
+                        return ResponseEntity.status(HttpStatus.OK).body("El registro se ha eliminado correctamente"+ id);
 
-        } catch (Exception error) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El registro no se ha podido eliminar: " + error);
+                    }
+                catch (Exception error) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El registro no se ha podido eliminar: " + error);
+                    }
         }
-    }
 
     @GetMapping
     @RequestMapping(path = "/find-client/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> encontrarPorId(@PathVariable Integer id, @RequestBody Cliente cliente){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
+                try{
+                        return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
+                    }
+                catch (Exception error){
+                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
+                    }
         }
-        catch (Exception error){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
-        }
-    }
     @RequestMapping(path = "/update-client/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> editarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id, cliente));
-        } catch (Exception error) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
-        }
+                try {
+                        return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id, cliente));
+                    }
+                catch (Exception error) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
+                    }
 
-    }
+        }
 
 }
