@@ -54,7 +54,7 @@ public class ControllerCliente {
             return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
         }
         catch (Exception error){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
         }
     }
     @RequestMapping(path = "/update-client/{id}", method = RequestMethod.PUT)
@@ -62,7 +62,7 @@ public class ControllerCliente {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id, cliente));
         } catch (Exception error) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo de requerimiento}" + error);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{El cliente no se ha encontrado}" + error);
         }
 
     }
