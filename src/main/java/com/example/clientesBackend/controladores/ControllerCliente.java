@@ -37,19 +37,32 @@ public class ControllerCliente {
 
 
     @RequestMapping(path = "/delete-client/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> eliminarCliente(Integer id){
+    public ResponseEntity<String> eliminarCliente(@PathVariable Integer id) {
+        try {
+            serviceCliente.eliminarCliente(id);
+            return ResponseEntity.status(HttpStatus.OK).body("El registro se ha eliminado correctamente"+ id);
+
+        } catch (Exception error) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El registro no se ha podido eliminar: " + error);
+        }
+    }
+
+    @GetMapping
+    @RequestMapping(path = "/find-client/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> encontrarPorId(@PathVariable Integer id, @RequestBody Cliente cliente){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.eliminarCliente(id));
+            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
         }
         catch (Exception error){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
         }
     }
-
+    @PutMapping
     @RequestMapping(path = "/edit-client/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> encontrarPorId(@RequestBody Cliente cliente, Integer id){
+    public ResponseEntity<?> editarCliente(@PathVariable Integer id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.encontrarPorId(id));
+
+            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id));
         }
         catch (Exception error){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
