@@ -57,16 +57,14 @@ public class ControllerCliente {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
         }
     }
-    @PutMapping
-    @RequestMapping(path = "/edit-client/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> editarCliente(@PathVariable Integer id){
-        try{
+    @RequestMapping(path = "/update-client/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> editarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id, cliente));
+        } catch (Exception error) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo de requerimiento}" + error);
+        }
 
-            return ResponseEntity.status(HttpStatus.OK).body(serviceCliente.editarCliente(id));
-        }
-        catch (Exception error){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{Retificar el cuerpo del requerimiento}"+error);
-        }
     }
 
 }

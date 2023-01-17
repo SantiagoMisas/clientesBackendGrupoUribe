@@ -14,5 +14,7 @@ public interface BaseService <E> {
 
     public E editarCliente(Integer id) throws Exception;
 
+    abstract Cliente editarCliente(Integer id, Cliente entity) throws Exception;
+
     public boolean eliminarCliente(Integer id) throws Exception;
 }
